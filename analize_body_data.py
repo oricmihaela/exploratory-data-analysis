@@ -111,10 +111,20 @@ def task_3():
         male_pdf = male_count/sum(male_count)
         male_cdf = np.cumsum(male_pdf)
 
+        female_first_quartile = np.percentile(female_bodydata[:, i], 25)  # Q1
+        female_third_quartile = np.percentile(female_bodydata[:, i], 75)  # Q3
+
+        male_first_quartile = np.percentile(male_bodydata[:, i], 25)  # Q1
+        male_third_quartile = np.percentile(male_bodydata[:, i], 75)  # Q3
+
         figure = plt.figure()
-        plt.plot(female_bins_count[1:], female_cdf, label='female')
-        plt.plot(male_bins_count[1:], male_cdf, label='male')
+        plt.plot(female_bins_count[1:], female_cdf, label='female', color='red')
+        plt.plot(male_bins_count[1:], male_cdf, label='male', color='blue')
         plt.grid(True, axis='y')
+        plt.axvline(x=male_first_quartile, label='male Q1', color='blue', alpha=0.2, linestyle='dashed')
+        plt.axvline(x=male_third_quartile, label='male Q3', color='blue', alpha=0.5, linestyle='dashed')
+        plt.axvline(x=female_first_quartile, label='female Q1', color='red', alpha=0.2, linestyle='dashed')
+        plt.axvline(x=female_third_quartile, label='female Q3', color='red', alpha=0.5, linestyle='dashed')
         plt.legend()
         plt.title(body_variables[i])
         plt.savefig('task_3/' + body_variables[i] + '.png')
@@ -172,8 +182,8 @@ def task_5():
         
 if __name__=='__main__':
     
-    task_1()
-    task_2()
+    # task_1()
+    # task_2()
     task_3()
-    task_4()
-    task_5()
+    # task_4()
+    # task_5()
